@@ -14,6 +14,9 @@ def file_path(file_name):
 image_background = pygame.image.load(file_path("background.png"))
 image_background = pygame.transform.scale(image_background, (WIN_WIDTH, WIN_HEIGHT))
 
+pygame.mixer.music.load(file_path("music.wav"))
+pygame.mixer.music.set_volume(0.1)
+pygame.mixer.music.play()
 
 window = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
 clock = pygame.time.Clock()
