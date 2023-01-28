@@ -32,7 +32,7 @@ class Gamesprite(pygame.sprite.Sprite):
         self.speed = speed
 
     def reset(self):
-        window.blit(self.image (self.rect.x, self.rect.y))
+        window.blit(self.image, (self.rect.x, self.rect.y))
 
 class Player(Gamesprite):
     def __init__(self, x, y, width, height, img, speed):
@@ -48,6 +48,7 @@ class Player(Gamesprite):
     def fire(self):
         pass
 
+player = Player(300, 400, 70, 70, "player.png", 5)
 
 play = True
 game = True
@@ -58,6 +59,11 @@ while game == True:
 
     if play == True:
         window.blit(image_background, (0, 0))
+
+        player.reset()
+        player.update()
+
+
 
     clock.tick(FPS)
     pygame.display.update()
