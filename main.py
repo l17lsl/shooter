@@ -6,6 +6,7 @@ pygame.init()
 WIN_WIDTH = 700
 WIN_HEIGHT = 500 
 FPS = 40
+BLACK = (70, 70, 70)
 
 def file_path(file_name):
     folder_path = os.path.abspath(__file__ + "/..")
@@ -55,9 +56,14 @@ class Enemy(Gamesprite):
         super().__init__(x, y, width, height, img, speed)
     
     def update(self):
+        global score_lose
         self.rect.y += self.speed
         if self.rect.y > WIN_HEIGHT:
+            self.rect.x = randint(0, WIN_WIDTH - 70)
+            score_lose += 1
             self.rect.y = 0
+
+
 
 
 enemys = pygame.sprite.Group()
@@ -68,8 +74,10 @@ for i in range(5):
 
 player = Player(300, 400, 70, 70, "player.png", 5)
 
+score_lose = 0
+score_destroy = 0
 
- 
+font = pygame.font.SysFont("verdana", 30)
 
 play = True
 game = True
@@ -80,6 +88,12 @@ while game == True:
 
     if play == True:
         window.blit(image_background, (0, 0))
+        
+        txt_lose = font.render("lost: " + str(score_lose), True, BLACK)
+        txt_destroy = font.render("destroyed: " + str(score_destroy), True, BLACK)
+        window.blit(txt_lose, (50, 50))
+        window.blit(txt_destroy, (50, 100))
+
 
         player.reset()
         player.update()
